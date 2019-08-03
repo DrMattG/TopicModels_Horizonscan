@@ -79,9 +79,12 @@ p <- ggplot(data = out_le,
   labs(x = "Topic number", y = "Intercept")+
   theme_classic()+
   theme(legend.position = "none")
+
+ggsave(p, file="results/estimate.png")
+
 p
 
-#ggsave(p, file="results/estimate.png")
+
 #dev.off()
 
 ```
@@ -95,4 +98,116 @@ topic.graph(d)
 ```
 
 
-knitr::include_graphics('results/1.png')
+knitr::include_graphics(https://github.com/DrMattG/TopicModels_Horizonscan/blob/master/results/1.png)
+
+## Are the increasing topics accelerating?
+
+To identify emerging themes I assessed, for the Topics that are increasing in popularity, the change in the slope of the regression line using a segmented regression from the Segmented R package. This will show if there has been any change in the rate of publications that address the Topics of interest. 
+
+```{r segmented regression, echo=TRUE}
+library(segmented)
+sub_d<-d %>% 
+  filter(topic==9)
+
+mod1<-lm(cntyr~ year, data=sub_d)
+
+o <- segmented(mod1, seg.Z = ~year,control = seg.control(display = FALSE))
+
+sub_d$brk = (broken.line(o)$fit)
+
+sub_d %>% 
+  ggplot(aes(year, cntyr))+
+  geom_point()+
+  geom_line(aes(year,brk))+
+  labs(x="Year", y= "Proportion of publications per year")+
+  theme_classic()+
+  ggtitle(paste("Topic:",Topicmodels$plot_ready$topic$caption[9]))+
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+
+```{r}
+sub_d<-d %>% 
+  filter(topic==13)
+
+mod1<-lm(cntyr~ year, data=sub_d)
+
+o <- segmented(mod1, seg.Z = ~year,control = seg.control(display = FALSE))
+
+sub_d$brk = (broken.line(o)$fit)
+
+sub_d %>% 
+  ggplot(aes(year, cntyr))+
+  geom_point()+
+  geom_line(aes(year,brk))+
+  labs(x="Year", y= "Proportion of publications per year")+
+  theme_classic()+
+  ggtitle(paste("Topic:",Topicmodels$plot_ready$topic$caption[13]))+
+  theme(plot.title = element_text(hjust = 0.5))
+
+
+```
+
+
+```{r}
+sub_d<-d %>% 
+  filter(topic==16)
+
+mod1<-lm(cntyr~ year, data=sub_d)
+
+o <- segmented(mod1, seg.Z = ~year,control = seg.control(display = FALSE))
+
+sub_d$brk = (broken.line(o)$fit)
+
+sub_d %>% 
+  ggplot(aes(year, cntyr))+
+  geom_point()+
+  geom_line(aes(year,brk))+
+  labs(x="Year", y= "Proportion of publications per year")+
+  theme_classic()+
+  ggtitle(paste("Topic:",Topicmodels$plot_ready$topic$caption[16]))+
+  theme(plot.title = element_text(hjust = 0.5))
+
+```
+
+```{r}
+sub_d<-d %>% 
+  filter(topic==17)
+
+mod1<-lm(cntyr~ year, data=sub_d)
+
+o <- segmented(mod1, seg.Z = ~year,control = seg.control(display = FALSE))
+
+sub_d$brk = (broken.line(o)$fit)
+
+sub_d %>% 
+  ggplot(aes(year, cntyr))+
+  geom_point()+
+  geom_line(aes(year,brk))+
+  labs(x="Year", y= "Proportion of publications per year")+
+  theme_classic()+
+  ggtitle(paste("Topic:",Topicmodels$plot_ready$topic$caption[17]))+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+```{r}
+sub_d<-d %>% 
+  filter(topic==18)
+
+mod1<-lm(cntyr~ year, data=sub_d)
+
+o <- segmented(mod1, seg.Z = ~year,control = seg.control(display = FALSE))
+
+sub_d$brk = (broken.line(o)$fit)
+
+sub_d %>% 
+  ggplot(aes(year, cntyr))+
+  geom_point()+
+  geom_line(aes(year,brk))+
+  labs(x="Year", y= "Proportion of publications per year")+
+  theme_classic()+
+  ggtitle(paste("Topic:",Topicmodels$plot_ready$topic$caption[18]))+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
