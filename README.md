@@ -8,5 +8,5 @@ Using search results from Web of Science (.bib files) we can make use of revtool
 
 
 
-![alt text](https://github.com/DrMattG/TopicModels_Horizonscan/results/estimate.png)
+![alt text](https://github.com/DrMattG/TopicModels_Horizonscan/blob/master/results/estimate.png)
 
